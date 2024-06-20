@@ -17,9 +17,6 @@ resources:
             parameters:
               - ""
           environment_key: Default
-        - task_key: notebook_task
-          notebook_task:
-            notebook_path: /ide-brickfood/cow-bff.ipynb
       queue:
         enabled: true
       environments:
