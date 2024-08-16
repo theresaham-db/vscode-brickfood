@@ -1,0 +1,26 @@
+resources:
+  jobs:
+    heatmap:
+      name: heatmap
+      email_notifications:
+        on_failure:
+          - theresa.hammer@databricks.com
+        no_alert_for_skipped_runs: true
+      schedule:
+        quartz_cron_expression: 30 8 10 * * ?
+        timezone_id: Europe/Amsterdam
+        pause_status: PAUSED
+      tasks:
+        - task_key: heatmap
+          spark_python_task:
+            python_file: ../src/heatmap.py
+          environment_key: Default
+        - task_key: notebook_task
+          notebook_task:
+            notebook_path: ../src/cow-bff.ipynb
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            client: "1"
